@@ -8,6 +8,12 @@ $(function () {
 		let shoesQuantity;
 		let shoesFloor;
 		switch (_shoesType) {
+			case 'common':
+				strShoesType = '灰鞋';
+				qualityLineColor = 'rgb(169, 169, 169)';
+				shoesQuantity = _data.aryCommonShoesQuantity;
+				shoesFloor = _data.aryCommonShoesFloor;
+				break;
 			case 'uncommon':
 				strShoesType = '綠鞋';
 				qualityLineColor = 'rgb(34, 139, 34)';
@@ -26,30 +32,93 @@ $(function () {
 				shoesQuantity = _data.aryEpicShoesQuantity;
 				shoesFloor = _data.aryEpicShoesFloor;
 				break;
+
 			default:
-				strShoesType = '灰鞋';
-				qualityLineColor = 'rgb(169, 169, 169)';
-				shoesQuantity = _data.aryCommonShoesQuantity;
-				shoesFloor = _data.aryCommonShoesFloor;
 				break;
 		}
 
 		let aryDataSets = [];
-		aryDataSets.push({
-			label: `${strShoesType} - 數量`,
-			yAxisID: 'IdCommonQuantity',
-			backgroundColor: qualityLineColor,
-			borderColor: qualityLineColor,
-			data: shoesQuantity,
-		});
-		aryDataSets.push({
-			label: `${strShoesType} - 地板價`,
-			yAxisID: 'IdCommonFloor',
-			backgroundColor: 'rgb(240, 128, 128)',
-			borderColor: 'rgb(240, 128, 128)',
-			borderDash: [2, 5],
-			data: shoesFloor,
-		});
+		switch (_shoesType) {
+			case '4_shoes_quantity':
+				aryDataSets.push({
+					label: '灰鞋',
+					yAxisID: 'IdCommonQuantity',
+					backgroundColor: 'rgb(169, 169, 169)',
+					borderColor: 'rgb(169, 169, 169)',
+					data: _data.aryCommonShoesQuantity,
+				});
+				aryDataSets.push({
+					label: '綠鞋',
+					yAxisID: 'IdCommonQuantity',
+					backgroundColor: 'rgb(34, 139, 34)',
+					borderColor: 'rgb(34, 139, 34)',
+					data: _data.aryUncommonShoesQuantity,
+				});
+				aryDataSets.push({
+					label: '藍鞋',
+					yAxisID: 'IdCommonQuantity',
+					backgroundColor: 'rgb(0, 191, 255)',
+					borderColor: 'rgb(0, 191, 255)',
+					data: _data.aryRareShoesQuantity,
+				});
+				aryDataSets.push({
+					label: '紫鞋',
+					yAxisID: 'IdCommonQuantity',
+					backgroundColor: 'rgb(148, 0, 211)',
+					borderColor: 'rgb(148, 0, 211)',
+					data: _data.aryEpicShoesQuantity,
+				});
+				break;
+
+			case '4_shoes_floor':
+				aryDataSets.push({
+					label: '灰鞋',
+					yAxisID: 'IdCommonFloor',
+					backgroundColor: 'rgb(169, 169, 169)',
+					borderColor: 'rgb(169, 169, 169)',
+					data: _data.aryCommonShoesFloor,
+				});
+				aryDataSets.push({
+					label: '綠鞋',
+					yAxisID: 'IdCommonFloor',
+					backgroundColor: 'rgb(34, 139, 34)',
+					borderColor: 'rgb(34, 139, 34)',
+					data: _data.aryUncommonShoesFloor,
+				});
+				aryDataSets.push({
+					label: '藍鞋',
+					yAxisID: 'IdCommonFloor',
+					backgroundColor: 'rgb(0, 191, 255)',
+					borderColor: 'rgb(0, 191, 255)',
+					data: _data.aryRareShoesFloor,
+				});
+				aryDataSets.push({
+					label: '紫鞋',
+					yAxisID: 'IdCommonFloor',
+					backgroundColor: 'rgb(148, 0, 211)',
+					borderColor: 'rgb(148, 0, 211)',
+					data: _data.aryEpicShoesFloor,
+				});
+				break;
+
+			default:		
+				aryDataSets.push({
+					label: `${strShoesType} - 數量`,
+					yAxisID: 'IdCommonQuantity',
+					backgroundColor: qualityLineColor,
+					borderColor: qualityLineColor,
+					data: shoesQuantity,
+				});
+				aryDataSets.push({
+					label: `${strShoesType} - 地板價`,
+					yAxisID: 'IdCommonFloor',
+					backgroundColor: 'rgb(240, 128, 128)',
+					borderColor: 'rgb(240, 128, 128)',
+					borderDash: [2, 5],
+					data: shoesFloor,
+				});
+				break;
+		}
 		return aryDataSets;
 	}
 
@@ -95,8 +164,8 @@ $(function () {
 							enabled: true,
 						},
 						mode: 'x',
-						onZoomComplete({ stepnChart }) {
-							stepnChart.update('none');
+						onZoomComplete({ chart }) {
+							chart.update();
 						},
 					},
 				},
@@ -165,24 +234,54 @@ $(function () {
 	// *** Event Handler ***
 	$('#btn-common').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'common');
+		stepnChart.options.scales.IdCommonFloor.display = true;
+		stepnChart.options.scales.IdCommonFloor.position = 'right';
+		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 
 	$('#btn-uncommon').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'uncommon');
+		stepnChart.options.scales.IdCommonFloor.display = true;
+		stepnChart.options.scales.IdCommonFloor.position = 'right';
+		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 
 	$('#btn-rare').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'rare');
+		stepnChart.options.scales.IdCommonFloor.display = true;
+		stepnChart.options.scales.IdCommonFloor.position = 'right';
+		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 
 	$('#btn-epic').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'epic');
+		stepnChart.options.scales.IdCommonFloor.display = true;
+		stepnChart.options.scales.IdCommonFloor.position = 'right';
+		stepnChart.options.scales.IdCommonQuantity.display = true;
+		stepnChart.resetZoom();
+		stepnChart.update();
+	});
+
+	$('#btn-4-quantity').on('click', function (e) {
+		stepnChart.data.datasets = prepareDataSets(stepnData, '4_shoes_quantity');
+		stepnChart.options.scales.IdCommonFloor.display = false;
+		stepnChart.options.scales.IdCommonFloor.position = 'right';
+		stepnChart.options.scales.IdCommonQuantity.display = true;
+		stepnChart.resetZoom();
+		stepnChart.update();
+	});
+	
+	$('#btn-4-floor').on('click', function (e) {
+		stepnChart.data.datasets = prepareDataSets(stepnData, '4_shoes_floor');
+		stepnChart.options.scales.IdCommonFloor.display = true;
+		stepnChart.options.scales.IdCommonFloor.position = 'left';
+		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
 	});
