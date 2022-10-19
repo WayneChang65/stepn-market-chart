@@ -1,8 +1,8 @@
 version: "3"
 services:
-  bot-api:
-      image: wayne/stepn-chart:0.0.1
-      hostname: stepn-chart
+  stepn-market-chart:
+      image: wayne/stepn-market-chart:0.0.1
+      hostname: stepn-market-chart
       ports:
         - 8083:80
 
@@ -14,7 +14,8 @@ services:
 
       volumes:
         - /home/wayne/dv/stepn-market-info/db:/usr/local/apache2/htdocs/db:ro
-      container_name: stepn-chart
+        
+      container_name: stepn-market-chart
       networks:
         - web_wayne-net
 

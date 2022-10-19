@@ -25,7 +25,7 @@ $(function () {
 				qualityLineColor = 'rgb(148, 0, 211)';
 				shoesQuantity = _data.aryEpicShoesQuantity;
 				shoesFloor = _data.aryEpicShoesFloor;
-				break;		
+				break;
 			default:
 				strShoesType = '灰鞋';
 				qualityLineColor = 'rgb(169, 169, 169)';
@@ -62,7 +62,7 @@ $(function () {
 					title: {
 						text: '數量',
 						display: true,
-					  },
+					},
 					position: 'left',
 				},
 				IdCommonFloor: {
@@ -71,17 +71,39 @@ $(function () {
 					title: {
 						text: 'Sol (Solana)',
 						display: true,
-					  },
+					},
 					position: 'right',
 					grid: {
 						drawOnChartArea: false,
 					},
 				},
 			},
+			plugins: {
+				zoom: {
+					limits: {
+						x: { minRange: 50 },
+					},
+					pan: {
+						enabled: true,
+						mode: 'x',
+					},
+					zoom: {
+						wheel: {
+							enabled: true,
+						},
+						pinch: {
+							enabled: true,
+						},
+						mode: 'x',
+						onZoomComplete({ stepnChart }) {
+							stepnChart.update('none');
+						},
+					},
+				},
+			},
 		};
 		return aryOptions;
 	}
-
 
 	async function init(_shoesType = 'common') {
 		stepnData = await getData();
@@ -133,7 +155,7 @@ $(function () {
 			aryRareShoesQuantity,
 			aryRareShoesFloor,
 			aryEpicShoesQuantity,
-			aryEpicShoesFloor
+			aryEpicShoesFloor,
 		};
 	}
 
@@ -143,23 +165,25 @@ $(function () {
 	// *** Event Handler ***
 	$('#btn-common').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'common');
+		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 
 	$('#btn-uncommon').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'uncommon');
+		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 
 	$('#btn-rare').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'rare');
+		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 
 	$('#btn-epic').on('click', function (e) {
 		stepnChart.data.datasets = prepareDataSets(stepnData, 'epic');
+		stepnChart.resetZoom();
 		stepnChart.update();
 	});
 });
-
-
