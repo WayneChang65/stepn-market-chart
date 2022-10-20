@@ -1,0 +1,1 @@
+uglifyjs main.js -c -m -o main.min.js
