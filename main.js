@@ -367,18 +367,406 @@ $(function () {
 		return aryOptions;
 	}
 
-	async function init(_shoesType = 'common') {
-		stepnData = await getData();
-		console.log(prepareOptions(stepnData));
+	function setBadgeButtonText(selector, txt) {
+		//str = str.replace(/\s*/g,""); 		// 去除字串內全部空格
+		//str = str.replace(/^\s*|\s*$/g,"");	// 去除字串前後空格
+		let aryResult = $(selector).html().replace(/^\s*|\s*$/g,'').split(' ');
+		aryResult[0] = txt;
+		$(selector).html(aryResult.join(' '));
+	}
 
-		stepnChart = new Chart(document.getElementById('StepNChart'), {
-			type: 'line',
-			data: {
-				labels: stepnData.aryDateTime,
-				datasets: prepareDataSets(stepnData),
-			},
-			options: prepareOptions(stepnData),
-		});
+	function updateUI_QuantityAndFloor(selector) {
+		switch (selector) {
+			case '#btn-common':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '數量');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryCommonShoesQuantity[
+						stepnData.aryCommonShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-2', '地板價');
+				$('#txt-2').css('background-color', 'lightcoral');
+				$('#txt-2 > span').html(
+					stepnData.aryCommonShoesFloor2[
+						stepnData.aryCommonShoesFloor2.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').addClass('invisible');
+				$('#txt-4').addClass('invisible');
+				break;
+
+			case '#btn-uncommon':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '數量');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryUncommonShoesQuantity[
+						stepnData.aryUncommonShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-2', '地板價');
+				$('#txt-2').css('background-color', 'lightcoral');
+				$('#txt-2 > span').html(
+					stepnData.aryUncommonShoesFloor2[
+						stepnData.aryUncommonShoesFloor2.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').addClass('invisible');
+				$('#txt-4').addClass('invisible');
+				break;
+
+			case '#btn-rare':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '數量');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryRareShoesQuantity[
+						stepnData.aryRareShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-2', '地板價');
+				$('#txt-2').css('background-color', 'lightcoral');
+				$('#txt-2 > span').html(
+					stepnData.aryRareShoesFloor[
+						stepnData.aryRareShoesFloor.length - 1
+					] + ' Sol'
+				);
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').addClass('invisible');
+				$('#txt-4').addClass('invisible');
+				break;
+
+			case '#btn-epic':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '數量');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryEpicShoesQuantity[
+						stepnData.aryEpicShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-2', '地板價');
+				$('#txt-2').css('background-color', 'lightcoral');
+				$('#txt-2 > span').html(
+					stepnData.aryEpicShoesFloor[
+						stepnData.aryEpicShoesFloor.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').addClass('invisible');
+				$('#txt-4').addClass('invisible');
+				break;
+
+			case '#btn-4-quantity':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '灰數量');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryCommonShoesQuantity[
+						stepnData.aryCommonShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-2', '綠數量');
+				$('#txt-2').css('background-color', 'lightgreen');
+				$('#txt-2 > span').html(
+					stepnData.aryUncommonShoesQuantity[
+						stepnData.aryUncommonShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-3', '藍數量');
+				$('#txt-3 > span').html(
+					stepnData.aryRareShoesQuantity[
+						stepnData.aryRareShoesQuantity.length - 1
+					]
+				);
+				setBadgeButtonText('#txt-4', '紫數量');
+				$('#txt-4 > span').html(
+					stepnData.aryEpicShoesQuantity[
+						stepnData.aryEpicShoesQuantity.length - 1
+					]
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			case '#btn-4-floor':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '灰地板');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryCommonShoesFloor2[
+						stepnData.aryCommonShoesFloor2.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-2', '綠地板');
+				$('#txt-2').css('background-color', 'lightgreen');
+				$('#txt-2 > span').html(
+					stepnData.aryUncommonShoesFloor2[
+						stepnData.aryUncommonShoesFloor2.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-3', '藍地板');
+				$('#txt-3 > span').html(
+					stepnData.aryRareShoesFloor[
+						stepnData.aryRareShoesFloor.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-4', '紫地板');
+				$('#txt-4 > span').html(
+					stepnData.aryEpicShoesFloor[
+						stepnData.aryEpicShoesFloor.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			case '#btn-runners':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '總人數');
+				$('#txt-1').css('background-color', 'lightsalmon');
+				$('#txt-1 > span').html(
+					stepnData.aryRunners[stepnData.aryRunners.length - 1]
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').addClass('invisible');
+				$('#txt-3').addClass('invisible');
+				$('#txt-4').addClass('invisible');
+				break;
+
+			case '#btn-4-scroll':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '灰地板');
+				$('#txt-1').css('background-color', 'lightgray');
+				$('#txt-1 > span').html(
+					stepnData.aryCommonScrollFloor[
+						stepnData.aryCommonScrollFloor.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-2', '綠地板');
+				$('#txt-2').css('background-color', 'lightgreen');
+				$('#txt-2 > span').html(
+					stepnData.aryUncommonScrollFloor[
+						stepnData.aryUncommonScrollFloor.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-3', '藍地板');
+				$('#txt-3 > span').html(
+					stepnData.aryRareScrollFloor[
+						stepnData.aryRareScrollFloor.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-4', '紫地板');
+				$('#txt-4 > span').html(
+					stepnData.aryEpicScrollFloor[
+						stepnData.aryEpicScrollFloor.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			case '#btn-3-gem-rb':
+				$('#txt-1').addClass('invisible');
+				$('#txt-2').addClass('invisible');
+				$('#txt-3').addClass('invisible');
+				$('#txt-4').addClass('invisible');
+				break;
+
+			case '#btn-4-gem-lv1':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '一級E');
+				$('#txt-1').css('background-color', 'burlywood');
+				$('#txt-1 > span').html(
+					stepnData.aryGemsFloor_e1[
+						stepnData.aryGemsFloor_e1.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-2', '一級C');
+				$('#txt-2').css('background-color', 'pink');
+				$('#txt-2 > span').html(
+					stepnData.aryGemsFloor_c1[
+						stepnData.aryGemsFloor_c1.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-3', '一級L');
+				$('#txt-3 > span').html(
+					stepnData.aryGemsFloor_l1[
+						stepnData.aryGemsFloor_l1.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-4', '一級R');
+				$('#txt-4 > span').html(
+					stepnData.aryGemsFloor_r1[
+						stepnData.aryGemsFloor_r1.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			case '#btn-4-gem-lv2':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '二級E');
+				$('#txt-1').css('background-color', 'burlywood');
+				$('#txt-1 > span').html(
+					stepnData.aryGemsFloor_e2[
+						stepnData.aryGemsFloor_e2.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-2', '二級C');
+				$('#txt-2').css('background-color', 'pink');
+				$('#txt-2 > span').html(
+					stepnData.aryGemsFloor_c2[
+						stepnData.aryGemsFloor_c2.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-3', '二級L');
+				$('#txt-3 > span').html(
+					stepnData.aryGemsFloor_l2[
+						stepnData.aryGemsFloor_l2.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-4', '二級R');
+				$('#txt-4 > span').html(
+					stepnData.aryGemsFloor_r2[
+						stepnData.aryGemsFloor_r2.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			case '#btn-4-gem-lv3':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '三級E');
+				$('#txt-1').css('background-color', 'burlywood');
+				$('#txt-1 > span').html(
+					stepnData.aryGemsFloor_e3[
+						stepnData.aryGemsFloor_e3.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-2', '三級C');
+				$('#txt-2').css('background-color', 'pink');
+				$('#txt-2 > span').html(
+					stepnData.aryGemsFloor_c3[
+						stepnData.aryGemsFloor_c3.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-3', '三級L');
+				$('#txt-3 > span').html(
+					stepnData.aryGemsFloor_l3[
+						stepnData.aryGemsFloor_l3.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-4', '三級R');
+				$('#txt-4 > span').html(
+					stepnData.aryGemsFloor_r3[
+						stepnData.aryGemsFloor_r3.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			case '#btn-4-gem-lv4':
+				$('#txt-0 > span').html(
+					stepnData.aryDateTime[stepnData.aryDateTime.length - 1]
+				);
+				setBadgeButtonText('#txt-1', '四級E');
+				$('#txt-1').css('background-color', 'burlywood');
+				$('#txt-1 > span').html(
+					stepnData.aryGemsFloor_e4[
+						stepnData.aryGemsFloor_e4.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-2', '四級C');
+				$('#txt-2').css('background-color', 'pink');
+				$('#txt-2 > span').html(
+					stepnData.aryGemsFloor_c4[
+						stepnData.aryGemsFloor_c4.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-3', '四級L');
+				$('#txt-3 > span').html(
+					stepnData.aryGemsFloor_l4[
+						stepnData.aryGemsFloor_l4.length - 1
+					] + ' Sol'
+				);
+				setBadgeButtonText('#txt-4', '四級R');
+				$('#txt-4 > span').html(
+					stepnData.aryGemsFloor_r4[
+						stepnData.aryGemsFloor_r4.length - 1
+					] + ' Sol'
+				);
+				$('#txt-1').removeClass('invisible');
+				$('#txt-2').removeClass('invisible');
+				$('#txt-3').removeClass('invisible');
+				$('#txt-4').removeClass('invisible');
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	async function init(_shoesType = 'common') {
+		await (async () => {
+			stepnData = await getData();
+			console.log(prepareOptions(stepnData));
+	
+			stepnChart = new Chart(document.getElementById('StepNChart'), {
+				type: 'line',
+				data: {
+					labels: stepnData.aryDateTime,
+					datasets: prepareDataSets(stepnData),
+				},
+				options: prepareOptions(stepnData),
+			});
+			
+			updateUI_QuantityAndFloor('#btn-common');
+		})();
 	}
 
 	async function getData() {
@@ -520,6 +908,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-common');
 	});
 
 	$('#btn-uncommon').on('click', function (e) {
@@ -529,6 +918,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-uncommon');
 	});
 
 	$('#btn-rare').on('click', function (e) {
@@ -538,6 +928,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-rare');
 	});
 
 	$('#btn-epic').on('click', function (e) {
@@ -547,6 +938,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-epic');
 	});
 
 	$('#btn-4-quantity').on('click', function (e) {
@@ -559,6 +951,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-quantity');
 	});
 
 	$('#btn-4-floor').on('click', function (e) {
@@ -568,6 +961,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-floor');
 	});
 
 	$('#btn-runners').on('click', function (e) {
@@ -577,6 +971,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = true;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-runners');
 	});
 
 	$('#btn-4-scroll').on('click', function (e) {
@@ -586,6 +981,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-scroll');
 	});
 
 	$('#btn-3-gem-rb').on('click', function (e) {
@@ -595,6 +991,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-3-gem-rb');
 	});
 
 	$('#btn-4-gem-lv1').on('click', function (e) {
@@ -604,6 +1001,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-gem-lv1');
 	});
 
 	$('#btn-4-gem-lv2').on('click', function (e) {
@@ -613,6 +1011,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-gem-lv2');
 	});
 
 	$('#btn-4-gem-lv3').on('click', function (e) {
@@ -622,6 +1021,7 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-gem-lv3');
 	});
 
 	$('#btn-4-gem-lv4').on('click', function (e) {
@@ -631,5 +1031,6 @@ $(function () {
 		stepnChart.options.scales.IdCommonQuantity.display = false;
 		stepnChart.resetZoom();
 		stepnChart.update();
+		updateUI_QuantityAndFloor('#btn-4-gem-lv4');
 	});
 });
