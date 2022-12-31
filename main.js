@@ -331,7 +331,7 @@ $(function () {
 					type: 'linear',
 					display: true,
 					title: {
-						text: 'Sol (Solana)',
+						text: 'Gmt (Solana)',
 						display: true,
 					},
 					position: 'right',
@@ -393,7 +393,7 @@ $(function () {
 				$('#txt-2 > span').html(
 					stepnData.aryCommonShoesFloor2[
 						stepnData.aryCommonShoesFloor2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -417,7 +417,7 @@ $(function () {
 				$('#txt-2 > span').html(
 					stepnData.aryUncommonShoesFloor2[
 						stepnData.aryUncommonShoesFloor2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -441,7 +441,7 @@ $(function () {
 				$('#txt-2 > span').html(
 					stepnData.aryRareShoesFloor[
 						stepnData.aryRareShoesFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-2').removeClass('invisible');
 				$('#txt-3').addClass('invisible');
@@ -464,7 +464,7 @@ $(function () {
 				$('#txt-2 > span').html(
 					stepnData.aryEpicShoesFloor[
 						stepnData.aryEpicShoesFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -517,26 +517,26 @@ $(function () {
 				$('#txt-1 > span').html(
 					stepnData.aryCommonShoesFloor2[
 						stepnData.aryCommonShoesFloor2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-2', '綠地板');
 				$('#txt-2').css('background-color', 'lightgreen');
 				$('#txt-2 > span').html(
 					stepnData.aryUncommonShoesFloor2[
 						stepnData.aryUncommonShoesFloor2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-3', '藍地板');
 				$('#txt-3 > span').html(
 					stepnData.aryRareShoesFloor[
 						stepnData.aryRareShoesFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-4', '紫地板');
 				$('#txt-4 > span').html(
 					stepnData.aryEpicShoesFloor[
 						stepnData.aryEpicShoesFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -568,26 +568,26 @@ $(function () {
 				$('#txt-1 > span').html(
 					stepnData.aryCommonScrollFloor[
 						stepnData.aryCommonScrollFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-2', '綠地板');
 				$('#txt-2').css('background-color', 'lightgreen');
 				$('#txt-2 > span').html(
 					stepnData.aryUncommonScrollFloor[
 						stepnData.aryUncommonScrollFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-3', '藍地板');
 				$('#txt-3 > span').html(
 					stepnData.aryRareScrollFloor[
 						stepnData.aryRareScrollFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-4', '紫地板');
 				$('#txt-4 > span').html(
 					stepnData.aryEpicScrollFloor[
 						stepnData.aryEpicScrollFloor.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -611,26 +611,26 @@ $(function () {
 				$('#txt-1 > span').html(
 					stepnData.aryGemsFloor_e1[
 						stepnData.aryGemsFloor_e1.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-2', '一級C');
 				$('#txt-2').css('background-color', 'pink');
 				$('#txt-2 > span').html(
 					stepnData.aryGemsFloor_c1[
 						stepnData.aryGemsFloor_c1.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-3', '一級L');
 				$('#txt-3 > span').html(
 					stepnData.aryGemsFloor_l1[
 						stepnData.aryGemsFloor_l1.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-4', '一級R');
 				$('#txt-4 > span').html(
 					stepnData.aryGemsFloor_r1[
 						stepnData.aryGemsFloor_r1.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -647,26 +647,26 @@ $(function () {
 				$('#txt-1 > span').html(
 					stepnData.aryGemsFloor_e2[
 						stepnData.aryGemsFloor_e2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-2', '二級C');
 				$('#txt-2').css('background-color', 'pink');
 				$('#txt-2 > span').html(
 					stepnData.aryGemsFloor_c2[
 						stepnData.aryGemsFloor_c2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-3', '二級L');
 				$('#txt-3 > span').html(
 					stepnData.aryGemsFloor_l2[
 						stepnData.aryGemsFloor_l2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-4', '二級R');
 				$('#txt-4 > span').html(
 					stepnData.aryGemsFloor_r2[
 						stepnData.aryGemsFloor_r2.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -683,26 +683,26 @@ $(function () {
 				$('#txt-1 > span').html(
 					stepnData.aryGemsFloor_e3[
 						stepnData.aryGemsFloor_e3.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-2', '三級C');
 				$('#txt-2').css('background-color', 'pink');
 				$('#txt-2 > span').html(
 					stepnData.aryGemsFloor_c3[
 						stepnData.aryGemsFloor_c3.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-3', '三級L');
 				$('#txt-3 > span').html(
 					stepnData.aryGemsFloor_l3[
 						stepnData.aryGemsFloor_l3.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-4', '三級R');
 				$('#txt-4 > span').html(
 					stepnData.aryGemsFloor_r3[
 						stepnData.aryGemsFloor_r3.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
@@ -719,26 +719,26 @@ $(function () {
 				$('#txt-1 > span').html(
 					stepnData.aryGemsFloor_e4[
 						stepnData.aryGemsFloor_e4.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-2', '四級C');
 				$('#txt-2').css('background-color', 'pink');
 				$('#txt-2 > span').html(
 					stepnData.aryGemsFloor_c4[
 						stepnData.aryGemsFloor_c4.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-3', '四級L');
 				$('#txt-3 > span').html(
 					stepnData.aryGemsFloor_l4[
 						stepnData.aryGemsFloor_l4.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				setBadgeButtonText('#txt-4', '四級R');
 				$('#txt-4 > span').html(
 					stepnData.aryGemsFloor_r4[
 						stepnData.aryGemsFloor_r4.length - 1
-					] + ' Sol'
+					] + ' Gmt'
 				);
 				$('#txt-1').removeClass('invisible');
 				$('#txt-2').removeClass('invisible');
